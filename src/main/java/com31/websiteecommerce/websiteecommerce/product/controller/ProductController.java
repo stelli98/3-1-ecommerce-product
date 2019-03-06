@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ProductController {
@@ -21,7 +22,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/products/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Product findById(@PathVariable Long id){
+    public Optional<Product> findById(@PathVariable Long id){
         return productService.findById(id);
     }
 
@@ -37,7 +38,7 @@ public class ProductController {
                 produces = MediaType.APPLICATION_JSON_VALUE,
                 consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Product update(@RequestBody Product product){
+    public Optional<Product> update(@RequestBody Product product){
         return productService.update(product);
     }
 

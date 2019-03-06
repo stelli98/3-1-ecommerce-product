@@ -5,6 +5,9 @@ import com31.websiteecommerce.websiteecommerce.product.service.ProductServiceImp
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
 
 public class ProductServiceImplTest {
     private ProductServiceImpl productService;
@@ -41,8 +44,8 @@ public class ProductServiceImplTest {
                 Long.valueOf(12000),
                 12);
         productService.create(productA);
-        Product searchProduct1= productService.findById(Long.valueOf(1));
-        Product searchProduct2= productService.findById(Long.valueOf(13));
+        Optional<Product> searchProduct1= productService.findById(Long.valueOf(1));
+        Optional<Product> searchProduct2= productService.findById(Long.valueOf(13));
         Assert.assertTrue("Must return Xiaomi Product Details", productA.equals(searchProduct1));
         Assert.assertTrue("Can't find unregistered id",searchProduct2==null);
     }
@@ -73,12 +76,12 @@ public class ProductServiceImplTest {
                 Long.valueOf(12000),
                 12);
         productService.create(productA);
-        Product updateProduct1= productService.update(new Product(Long.valueOf(1),"Xiomai","Handphone",Long.valueOf(27500),21));
-        Product updateProduct2= productService.update(new Product(Long.valueOf(12),"Xiomai","Handphone",Long.valueOf(27500),21));
+        Optional<Product> updateProduct1= productService.update(new Product(Long.valueOf(1),"Xiomai","Handphone",Long.valueOf(27500),21));
+        Optional<Product> updateProduct2= productService.update(new Product(Long.valueOf(12),"Xiomai","Handphone",Long.valueOf(27500),21));
 
-        Assert.assertTrue("Product name must change to xiomai",updateProduct1.getName().equals("Xiomai"));
-        Assert.assertTrue("Product category must change to handphone",updateProduct1.getCategory().equals("Handphone"));
-        Assert.assertTrue("Product price must change to 27500",updateProduct1.getPrice()==27500);
+        Assert.assertTrue("Product name must change to xiomai",updateProduct1.get().getName().equals("Xiomai"));
+        Assert.assertTrue("Product category must change to handphone",updateProduct1.get().getCategory().equals("Handphone"));
+        Assert.assertTrue("Product price must change to 27500",updateProduct1.get().getPrice()==27500);
         Assert.assertTrue("Can't change the id",updateProduct2 == null);
 
     }

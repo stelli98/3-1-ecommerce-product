@@ -1,44 +1,40 @@
 package com31.websiteecommerce.websiteecommerce.product.service;
 
 import com31.websiteecommerce.websiteecommerce.product.model.Product;
+import com31.websiteecommerce.websiteecommerce.product.repository.ProductRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductServiceImpl implements ProductService {
-    private ArrayList<Product> products=new ArrayList<>();
+    private ProductRepository productRepository;
 
     @Override
     public Product create(Product product) {
         if(findById(product.getId())==null){
-            products.add(product);
+            productRepository.save(product);
             return product;
         }
         return null;
     }
 
     @Override
-    public Product findById(Long id) {
-        for(Product p:products){
-            if(p.getId().equals(id)){
-                return p;
-            }
-        }
-        return null;
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
     }
 
     @Override
     public List<Product> findAll() {
-        return products;
+        return productRepository.findAll();
     }
 
     @Override
-    public Product update(Product product) {
-        Product updateProduct= findById(product.getId());
-        if(updateProduct!=null){
+    public Optional<Product> update(Product product) {
+        Optional<Product> updateProduct= findById(product.getId());
+        if(updateProduct.isPresent()){
             BeanUtils.copyProperties(product,updateProduct);
             return updateProduct;
         }
@@ -47,10 +43,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product delete( Long id) {
-        Product product= findById(id);
-        if(product!=null){
-            products.remove(product);
-            return product;
+        Optional<Product> product= findById(id);
+        if(product.isPresent()){
+            productRepository.delete(product.get());
+            return product.get();
         }
         return null;
     }
