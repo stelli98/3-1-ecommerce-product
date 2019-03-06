@@ -70,4 +70,32 @@ public class ProductRepositoryTest {
         Assert.assertTrue("List size must be 2", find.size()==2);
     }
 
+    @Test
+    public void deleteTest(){
+        Product productA=new Product();
+        productA.setName("Xiaomi");
+        productA.setCategory("Handphone");
+        productA.setPrice(1_000_000L);
+        Product saveProductA= productRepository.save(productA);
+
+
+        Product productB=new Product();
+        productB.setName("Mini Cooper");
+        productB.setCategory("Car");
+        productB.setPrice(12_000_000L);
+        Product saveProductB= productRepository.save(productB);
+
+        Product productC=new Product();
+        productC.setName("Shirt");
+        productC.setCategory("Fashion");
+        productC.setPrice(200_000L);
+        Product saveProductC= productRepository.save(productC);
+
+        productRepository.delete(saveProductB);
+        Assert.assertTrue("List size must be 2", productRepository.findAll().size()==2);
+        Assert.assertTrue("List id from mini cooper must be not found",
+                productRepository.findById(saveProductB.getId())==null);
+
+    }
+
 }
