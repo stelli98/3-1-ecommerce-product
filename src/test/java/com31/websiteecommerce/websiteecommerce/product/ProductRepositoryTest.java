@@ -93,8 +93,9 @@ public class ProductRepositoryTest {
 
         productRepository.delete(saveProductB);
         Assert.assertTrue("List size must be 2", productRepository.findAll().size()==2);
-        Assert.assertTrue("List id from mini cooper must be not found",
-                productRepository.findById(saveProductB.getId())==null);
+        Assert.assertFalse("List id from mini cooper must be not found",
+                productRepository.findById(saveProductB.getId()).isPresent());
+
 
     }
 
