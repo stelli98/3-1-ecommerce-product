@@ -1,6 +1,6 @@
 package com31.websiteecommerce.websiteecommerce.product.service;
 
-import com31.websiteecommerce.websiteecommerce.product.model.Product;
+import com31.websiteecommerce.websiteecommerce.product.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package com31.websiteecommerce.websiteecommerce.product.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com31.websiteecommerce.websiteecommerce.product.model.Category;
+import com31.websiteecommerce.websiteecommerce.product.entity.Category;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;

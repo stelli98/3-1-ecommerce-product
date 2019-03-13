@@ -1,10 +1,10 @@
 package com31.websiteecommerce.websiteecommerce.product.controller;
 
-import com31.websiteecommerce.websiteecommerce.product.model.Product;
+import com31.websiteecommerce.websiteecommerce.product.entity.Product;
+import com31.websiteecommerce.websiteecommerce.product.model.ApiKey;
 import com31.websiteecommerce.websiteecommerce.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,14 +21,14 @@ public class ProductController {
 
     @CrossOrigin
     @GetMapping(value = "/products",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Product> findAll(){
+    public List<Product> findAll(ApiKey apiKey){
         return productService.findAll();
     }
 
 
     @CrossOrigin
     @GetMapping(value = "/products/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<Product> findById(@PathVariable Long id){
+    public Optional<Product> findById(@PathVariable Long id, ApiKey apiKey){
         return productService.findById(id);
     }
 
@@ -37,7 +37,7 @@ public class ProductController {
                  produces = MediaType.APPLICATION_JSON_VALUE,
                  consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Product create(@RequestBody Product product){
+    public Product create(@RequestBody Product product, ApiKey apiKey){
         return productService.create(product);
     }
 
@@ -46,7 +46,7 @@ public class ProductController {
                 produces = MediaType.APPLICATION_JSON_VALUE,
                 consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Product update(@RequestBody Product product){
+    public Product update(@RequestBody Product product,ApiKey apiKey){
         return productService.update(product);
     }
 
@@ -54,7 +54,7 @@ public class ProductController {
     @DeleteMapping(value = "/products/{id}",
                    produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Product delete(@PathVariable Long id){
+    public Product delete(@PathVariable Long id, ApiKey apiKey){
         return productService.delete(id);
     }
 

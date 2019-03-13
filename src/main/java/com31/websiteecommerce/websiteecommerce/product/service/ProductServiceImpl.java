@@ -1,6 +1,6 @@
 package com31.websiteecommerce.websiteecommerce.product.service;
 
-import com31.websiteecommerce.websiteecommerce.product.model.Product;
+import com31.websiteecommerce.websiteecommerce.product.entity.Product;
 import com31.websiteecommerce.websiteecommerce.product.repository.ProductRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

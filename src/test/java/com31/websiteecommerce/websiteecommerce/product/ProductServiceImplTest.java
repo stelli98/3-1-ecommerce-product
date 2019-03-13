@@ -1,15 +1,13 @@
 package com31.websiteecommerce.websiteecommerce.product;
 
-import com31.websiteecommerce.websiteecommerce.product.model.Product;
+import com31.websiteecommerce.websiteecommerce.product.entity.Product;
 import com31.websiteecommerce.websiteecommerce.product.repository.ProductRepository;
 import com31.websiteecommerce.websiteecommerce.product.service.ProductServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.beans.Customizer;
 import java.util.Optional;
 
 public class ProductServiceImplTest {
