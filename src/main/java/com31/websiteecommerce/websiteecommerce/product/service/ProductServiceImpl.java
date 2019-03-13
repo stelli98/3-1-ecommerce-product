@@ -3,6 +3,7 @@ package com31.websiteecommerce.websiteecommerce.product.service;
 import com31.websiteecommerce.websiteecommerce.product.model.Product;
 import com31.websiteecommerce.websiteecommerce.product.repository.ProductRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,15 +11,18 @@ import java.util.Optional;
 
 @Component
 public class ProductServiceImpl implements ProductService {
+
+
     private ProductRepository productRepository;
+
+    @Autowired
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public Product create(Product product) {
-        if(findById(product.getId())==null){
-            productRepository.save(product);
-            return product;
-        }
-        return null;
+        return productRepository.save(product);
     }
 
     @Override
@@ -32,11 +36,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> update(Product product) {
-        Optional<Product> updateProduct= findById(product.getId());
+    public Product update(Product product) {
+        final Optional<Product> updateProduct= findById(product.getId());
         if(updateProduct.isPresent()){
-            BeanUtils.copyProperties(product,updateProduct);
-            return updateProduct;
+            BeanUtils.copyProperties(product,updateProduct.get());
+            productRepository.save(updateProduct.get());
+            return updateProduct.get();
         }
         return null;
     }
